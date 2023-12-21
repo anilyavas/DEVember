@@ -7,7 +7,7 @@ type DayListItem = {
 export default function DayListItem({day}:DayListItem){
     return (
         <View style={styles.box} >
-        <Text style={styles.text}>{day}</Text>
+        <Text style={styles.text}>{day}</Text> 
       </View>
     )
 }
@@ -26,5 +26,6 @@ box: {
 text: {
     color: "#9B4521",
     fontSize: 70,
+    fontFamily: "Inter",
   },
 });
