@@ -1,9 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { FlatList, StyleSheet, View } from 'react-native';
-import DayListItem from '../components/core/DayListItem';
-import * as SplashScreen from "expo-splash-screen";
+import DayListItem from "@components/core/DayListItem";
 
-SplashScreen.preventAutoHideAsync();
 
 const days = [...Array(24)].map((val,index) => index+1);
 
