@@ -2,6 +2,9 @@ import { Text, View, StyleSheet,SafeAreaView,Pressable } from "react-native"
 import {  Stack, router } from "expo-router";
 import {FontAwesome5} from "@expo/vector-icons";
 import { useState } from "react";
+import { StatusBar } from "expo-status-bar";
+import { GestureDetector,Gesture } from "react-native-gesture-handler";
+
 
 
 const onboardingSteps = [
@@ -36,13 +39,24 @@ export default function OnboardingScreen() {
     const endOnboarding = () => {
         setScreenIndex(0);
         router.back();
+    };
+    const fling = Gesture.Fling().onEnd((event) => {
+        console.log("fling");
     }
+    );
 
     return (
         
         <SafeAreaView style={styles.page}>
             <Stack.Screen options={{ headerShown: false }} />
+            <StatusBar style="light"/>
+            <GestureDetector gesture={fling}>
             <View style={styles.pageContent}>
+                <View style={styles.stepIndicatorContainer}>
+                    {onboardingSteps.map((step,index) => (
+                    <View style={[styles.stepIndicator, {backgroundColor: index === screenIndex ? "#cef202" : "grey"  }]} />
+                   ))}
+                </View>
             <FontAwesome5 style={styles.image} name={data.icon} size={100} color="#cef202" />
             <View style={styles.footer}>
             <Text style={styles.title}>{data.title}</Text>
@@ -55,6 +69,7 @@ export default function OnboardingScreen() {
             </View>
             </View>
             </View>
+            </GestureDetector>
         </SafeAreaView>
     );
 }
@@ -69,10 +84,23 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 20,
     },
+    stepIndicatorContainer: {
+        flexDirection: "row",
+        gap: 8,
+        marginHorizontal: 15,
+    },
+    stepIndicator: {
+        flex: 1,
+        height: 3,
+        backgroundColor: "grey",
+        borderRadius: 10,
+    },
     image: {
         alignSelf: "center",
         margin: 20,
+        marginTop: 50,
     },
+    
     title: {
         color: "#fdfdfd",
         fontSize: 50,
