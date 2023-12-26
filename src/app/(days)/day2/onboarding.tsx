@@ -3,7 +3,7 @@ import {  Stack, router } from "expo-router";
 import {FontAwesome5} from "@expo/vector-icons";
 import { useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { GestureDetector,Gesture } from "react-native-gesture-handler";
+import { GestureDetector,Gesture, Directions } from "react-native-gesture-handler";
 
 
 
@@ -36,21 +36,45 @@ export default function OnboardingScreen() {
         setScreenIndex(screenIndex+1);
         }
     };
+    const onBack = () => {
+        const isFirstScreen = screenIndex === 0;
+        if(isFirstScreen){
+            endOnboarding();
+        }else{
+            setScreenIndex(screenIndex - 1);
+        }
+    };
     const endOnboarding = () => {
         setScreenIndex(0);
         router.back();
     };
-    const fling = Gesture.Fling().onEnd((event) => {
-        console.log("fling");
-    }
-    );
+    const swipeForward = Gesture.Fling()
+    .direction(Directions.LEFT)
+    //.onBegin((event) => {
+    //    console.log("Fling",event.state);
+    //})
+    .onEnd((event) => {
+        console.log("Fling end: " ,event)
+        onContinue();
+    })  
+    const swipeBack = Gesture.Fling()
+    .direction(Directions.RIGHT)
+    //.onBegin((event) => {
+    //    console.log("Fling",event.state);
+    //})
+    .onEnd((event) => {
+        console.log("Fling end: " ,event)
+        onBack();
+    })    
+    const swipes = Gesture.Simultaneous(swipeBack,swipeForward);
+    
 
     return (
         
         <SafeAreaView style={styles.page}>
             <Stack.Screen options={{ headerShown: false }} />
             <StatusBar style="light"/>
-            <GestureDetector gesture={fling}>
+            <GestureDetector gesture={swipes}>
             <View style={styles.pageContent}>
                 <View style={styles.stepIndicatorContainer}>
                     {onboardingSteps.map((step,index) => (
