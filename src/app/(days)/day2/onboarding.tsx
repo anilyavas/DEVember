@@ -4,6 +4,7 @@ import {FontAwesome5} from "@expo/vector-icons";
 import { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { GestureDetector,Gesture, Directions } from "react-native-gesture-handler";
+import Animated ,{FadeIn, FadeOut, BounceOutLeft,BounceInRight, SlideInLeft } from "react-native-reanimated";
 
 
 
@@ -19,7 +20,7 @@ const onboardingSteps = [
         description: "Learn by building 24 projects with React Native and Expo",
     },
     {
-        icon: "people-arrows",
+        icon: "book-reader",
         title: "Education for children",
         description: "Contribute to the fundraiser to help save the children in their effort of providing education to every child",
     },
@@ -60,16 +61,18 @@ export default function OnboardingScreen() {
             <Stack.Screen options={{ headerShown: false }} />
             <StatusBar style="light"/>
             <GestureDetector gesture={swipes}>
-            <View style={styles.pageContent}>
+            <View key={screenIndex} style={styles.pageContent}>
                 <View style={styles.stepIndicatorContainer}>
                     {onboardingSteps.map((step,index) => (
                     <View style={[styles.stepIndicator, {backgroundColor: index === screenIndex ? "#cef202" : "grey"  }]} />
                    ))}
                 </View>
+                <Animated.View entering={FadeIn} exiting={FadeOut}>
             <FontAwesome5 style={styles.image} name={data.icon} size={100} color="#cef202" />
+            </Animated.View>
             <View style={styles.footer}>
-            <Text style={styles.title}>{data.title}</Text>
-            <Text style={styles.description}>{data.description}</Text>
+            <Animated.Text entering={SlideInLeft} style={styles.title}>{data.title}</Animated.Text>
+            <Animated.Text entering={SlideInLeft} style={styles.description}>{data.description}</Animated.Text>
             <View style={styles.buttonsRow}>
                 <Text onPress={endOnboarding} style={styles.buttonText}>Skip</Text>
             <Pressable onPress={onContinue} style={styles.button}>
