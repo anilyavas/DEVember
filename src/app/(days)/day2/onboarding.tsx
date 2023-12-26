@@ -68,11 +68,11 @@ export default function OnboardingScreen() {
                    ))}
                 </View>
                 <Animated.View entering={FadeIn} exiting={FadeOut}>
-            <FontAwesome5 style={styles.image} name={data.icon} size={100} color="#cef202" />
+            <FontAwesome5 style={styles.image} name={data.icon} size={150} color="#cef202" />
             </Animated.View>
             <View style={styles.footer}>
             <Animated.Text entering={SlideInRight} exiting={SlideOutLeft} style={styles.title}>{data.title}</Animated.Text>
-            <Animated.Text entering={SlideInRight.delay(150)} exiting={SlideOutLeft} style={styles.description}>{data.description}</Animated.Text>
+            <Animated.Text entering={SlideInRight.delay(50)} exiting={SlideOutLeft} style={styles.description}>{data.description}</Animated.Text>
             <View style={styles.buttonsRow}>
                 <Text onPress={endOnboarding} style={styles.buttonText}>Skip</Text>
             <Pressable onPress={onContinue} style={styles.button}>
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     image: {
         alignSelf: "center",
         margin: 20,
-        marginTop: 50,
+        marginTop: 70,
     },
     
     title: {
