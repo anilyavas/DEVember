@@ -4,7 +4,7 @@ import {FontAwesome5} from "@expo/vector-icons";
 import { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { GestureDetector,Gesture, Directions } from "react-native-gesture-handler";
-import Animated ,{FadeIn, FadeOut, BounceOutLeft,BounceInRight, SlideInLeft } from "react-native-reanimated";
+import Animated ,{FadeIn, FadeOut, BounceOutLeft,BounceInRight, SlideInRight, SlideOutLeft } from "react-native-reanimated";
 
 
 
@@ -64,15 +64,15 @@ export default function OnboardingScreen() {
             <View key={screenIndex} style={styles.pageContent}>
                 <View style={styles.stepIndicatorContainer}>
                     {onboardingSteps.map((step,index) => (
-                    <View style={[styles.stepIndicator, {backgroundColor: index === screenIndex ? "#cef202" : "grey"  }]} />
+                    <View key={index} style={[styles.stepIndicator, {backgroundColor: index === screenIndex ? "#cef202" : "grey"  }]} />
                    ))}
                 </View>
                 <Animated.View entering={FadeIn} exiting={FadeOut}>
             <FontAwesome5 style={styles.image} name={data.icon} size={100} color="#cef202" />
             </Animated.View>
             <View style={styles.footer}>
-            <Animated.Text entering={SlideInLeft} style={styles.title}>{data.title}</Animated.Text>
-            <Animated.Text entering={SlideInLeft} style={styles.description}>{data.description}</Animated.Text>
+            <Animated.Text entering={SlideInRight} exiting={SlideOutLeft} style={styles.title}>{data.title}</Animated.Text>
+            <Animated.Text entering={SlideInRight.delay(150)} exiting={SlideOutLeft} style={styles.description}>{data.description}</Animated.Text>
             <View style={styles.buttonsRow}>
                 <Text onPress={endOnboarding} style={styles.buttonText}>Skip</Text>
             <Pressable onPress={onContinue} style={styles.button}>
