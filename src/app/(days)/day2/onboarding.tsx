@@ -48,25 +48,10 @@ export default function OnboardingScreen() {
         setScreenIndex(0);
         router.back();
     };
-    const swipeForward = Gesture.Fling()
-    .direction(Directions.LEFT)
-    //.onBegin((event) => {
-    //    console.log("Fling",event.state);
-    //})
-    .onEnd((event) => {
-        console.log("Fling end: " ,event)
-        onContinue();
-    })  
-    const swipeBack = Gesture.Fling()
-    .direction(Directions.RIGHT)
-    //.onBegin((event) => {
-    //    console.log("Fling",event.state);
-    //})
-    .onEnd((event) => {
-        console.log("Fling end: " ,event)
-        onBack();
-    })    
-    const swipes = Gesture.Simultaneous(swipeBack,swipeForward);
+
+    const swipes = Gesture.Simultaneous(
+        Gesture.Fling().direction(Directions.LEFT) 
+        .onEnd(onContinue),Gesture.Fling().direction(Directions.RIGHT).onEnd(onBack));
     
 
     return (
