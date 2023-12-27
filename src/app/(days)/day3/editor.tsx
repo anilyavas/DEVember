@@ -1,49 +1,62 @@
-import { View, Text,StyleSheet } from "react-native";
-import Markdown from "react-native-markdown-display";
+import { StyleSheet, View,TextInput, Text, Pressable } from "react-native";
+import MarkdownDisplay from "@/components/day3/MarkdownDisplay";
+import { useState } from "react";
 
-const copy = `# Sample Markdown Content
+const template = `# Sample Markdown Content
 
-## Introduction
-Welcome to this sample markdown document. Markdown is a lightweight markup language for 
-
-## Section 1: Markdown Basics
-
-- **Bold Text:** Use ** or __ to make text bold. Example: **This is bold**
-- *Italic Text:* Use * or _ to make text italic. Exmaple: *This is italic* 
-
-## Subsection: Lists
-
-1. Numbered lists are easy
-2. Just start with a nmber and a dot
-3. Like this!
-
-- Bullet lists are also simple
-- Use a dash and a space
-- Like this!
-
-## Section 2: Advance Topics
-
-## Images and Links
-
-- To add an image: '![Alt text](URL)'
-- To create a link: '[Link text](URL)'
-
-### Code Blocks
+Hello **World**!
 `;
 
 export default function EditorScreen() {
+    const [content,setContent] = useState(template);
+    const [tab,setTab] = useState("edit");
   return (
     <View style={styles.page}>
-        <Markdown>{copy}</Markdown>
+        <View style={styles.tabsContainer}>
+            <Pressable onPress={() => setTab("edit")} style={[styles.tab,{borderColor: tab === "edit"?"mediumorchid": "grey"}]}>
+            <Text style={styles.tabText}>Edit</Text>
+            </Pressable>
+            <Pressable onPress={() => setTab("preview")} style={[styles.tab,{borderColor: tab === "preview"?"mediumorchid": "grey"}]}>
+            <Text style={styles.tabText}>Preview</Text>
+            </Pressable>
+
+        </View>
+        {tab === "edit" ? (<TextInput value={content} onChangeText={setContent} multiline numberOfLines={50} style={styles.input} />)
+: <MarkdownDisplay>{content}</MarkdownDisplay>}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
     page: {
-        backgroundColor: "white",
+        backgroundColor: "whitesmoke",
         flex: 1,
         padding: 10,
+        
+    },
+    input: {
+        backgroundColor: "white",
+        flex: 1,
+        padding: 20,
+        paddingTop: 20,
+        borderRadius: 10,
+        fontSize: 16,
+    },
+    tab: {
+        flex: 1,
+        padding: 10,
+        borderColor: "grey",
+        borderWidth: 2,
+        alignItems: "center",
+        borderRadius: 10,
+    },
+    tabsContainer: {
+        flexDirection: "row",
+        gap: 10,
+        marginVertical: 10,
+    },
+    tabText: {
+        fontFamily: "InterBold",
     },
 });
 
