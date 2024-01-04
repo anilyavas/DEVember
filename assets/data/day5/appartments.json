@@ -1,0 +1,53 @@
+[
+    {
+      "id": 1,
+      "latitude": 37.7749,
+      "longitude": -122.4194,
+      "price": 150,
+      "title": "Cozy Studio in Downtown",
+      "stars": 4,
+      "rating": 8.5,
+      "image": "https://example.com/studio1.jpg"
+    },
+    {
+      "id": 2,
+      "latitude": 37.7920,
+      "longitude": -122.4305,
+      "price": 200,
+      "title": "Luxurious Penthouse with a View",
+      "stars": 5,
+      "rating": 9.2,
+      "image": "https://example.com/penthouse.jpg"
+    },
+    {
+      "id": 3,
+      "latitude": 37.7577,
+      "longitude": -122.4376,
+      "price": 120,
+      "title": "Charming Brownstone Apartment",
+      "stars": 4.5,
+      "rating": 8.0,
+      "image": "https://example.com/brownstone.jpg"
+    },
+    {
+      "id": 4,
+      "latitude": 37.7920,
+      "longitude": -122.4305,
+      "price": 200,
+      "title": "Luxurious Penthouse with a View",
+      "stars": 5,
+      "rating": 9.2,
+      "image": "https://example.com/penthouse.jpg"
+    },
+    {
+      "id": 5,
+      "latitude": 37.7577,
+      "longitude": -122.4376,
+      "price": 120,
+      "title": "Charming Brownstone Apartment",
+      "stars": 4.5,
+      "rating": 8.0,
+      "image": "https://example.com/brownstone.jpg"
+    }
+  ]
+  
