@@ -1,5 +1,5 @@
 import { Stack } from 'expo-router';
-import { View, StyleSheet, Text, FlatList } from 'react-native'
+import { View, StyleSheet, Text } from 'react-native'
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps'
 import apartments from "@assets/data/day5/appartments.json"
 import CustomMarker from '@/components/day5/CustomMarker';
@@ -47,10 +47,10 @@ export default function AirbnbScreen() {
   }} />
   )}
   <BottomSheet 
-  // ref={bottomSheetRef}
   index={0}
   snapPoints={snapPoints}
-  // onChange={handleSheetChanges}
+  onChange={(index) => console.log("On Change" + index)}
+  onAnimate={(from,to) => console.log("From" +from + "to" +to)}
   >
     <View style={styles.contentContainer}>
       <Text style={styles.listTitle}>Over {apartments.length} places</Text>
