@@ -2,7 +2,7 @@ import { View,StyleSheet } from 'react-native'
 import React from 'react'
 import TinderCard from '@/components/day6/TinderCard'
 import { Stack } from 'expo-router';
-import { interpolate, useSharedValue, withDecay, withSpring} from "react-native-reanimated";
+import { interpolate, useSharedValue, withSpring} from "react-native-reanimated";
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 
 
@@ -42,7 +42,6 @@ export default function TinderScreen() {
     .onBegin((event) => console.log("onBegin:"))
     .onChange((event) => {
       translationX.value = event.translationX;
-      // activeIndex.value = interpolate();
     })
     .onStart((event) => console.log("onStart:"))
     .onEnd((event) => {
