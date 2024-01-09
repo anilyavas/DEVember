@@ -5,18 +5,19 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 
 
 const description = `
-# IOS Voice Memos
+# Voice Memos
+Work with the Microphone and Audio playback
 `;
 
 export default function DayDetailsScreen() {
   return (
     <SafeAreaView edges={['bottom']} style={{flex:1}}>
-    <Stack.Screen options={{title: "Day 7: IOS Voice Memos"}}/>
+    <Stack.Screen options={{title: "Day 7: Voice Memos"}}/>
 
     <MarkdownDisplay>{description}</MarkdownDisplay>
 
-    <Link href={"/da7/"} asChild>
-    <Button title='Go to' />
+    <Link href={"/day7/memos"} asChild>
+    <Button title='Go to memos' />
     </Link>
     
 
