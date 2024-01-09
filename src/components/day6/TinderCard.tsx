@@ -4,8 +4,8 @@ import {LinearGradient} from "expo-linear-gradient";
 import Animated, { SharedValue, interpolate, useAnimatedStyle} from 'react-native-reanimated';
 
 
-
-export const tinderCardWidth = Dimensions.get("screen").width *0.8;
+const screenWidth = Dimensions.get('screen').width;
+export const tinderCardWidth = Dimensions.get('screen').width *0.8;
 
 type TinderCard = {
     user: {
@@ -15,12 +15,30 @@ type TinderCard = {
     numOfCards: number,
     index: number,
     activeIndex: SharedValue<number>,
+    translationX: SharedValue<number>,
 }
 
-export default function TinderCard({user,numOfCards,index,activeIndex}: TinderCard) {
+export default function TinderCard({user,numOfCards,index,activeIndex,translationX}: TinderCard) {
     
     const style = useAnimatedStyle(() => ({
-        opacity: interpolate(activeIndex.value, [index-1, index, index+1],[1- 1/5,1,1]),
+        opacity: interpolate(
+            activeIndex.value, 
+            [index-1, index, index+1],
+            [1- 1/5,1,1]),
+            transform: [
+                {
+                    scale: interpolate(activeIndex.value, [index-1, index, index+1],[0.95,1,1]),
+                },
+                {
+                    translateY: interpolate(activeIndex.value, [index-1,index,index+1],[-30,0,0]),
+                },
+                {
+                    translateX: activeIndex.value === index ? translationX.value : 0,
+                },
+                {
+                    rotateZ: activeIndex.value === index ?  `${interpolate(translationX.value,[-screenWidth / 2,0,screenWidth/2],[-15,0,15])}deg` : '0deg',
+                },
+            ],
     }));
 
   return (
