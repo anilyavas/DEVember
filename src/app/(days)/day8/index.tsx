@@ -5,18 +5,17 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 
 
 const description = `
-# Weather Application
-Work with the Microphone and Audio playback
-`;
+# Weather App
+Fetch weather data and display it`;
 
 export default function DayDetailsScreen() {
   return (
     <SafeAreaView edges={['bottom']} style={{flex:1}}>
-    <Stack.Screen options={{title: "Day 8: WeatherApp"}}/>
+    <Stack.Screen options={{title: "Day 8: Weather App"}}/>
 
     <MarkdownDisplay>{description}</MarkdownDisplay>
 
-    <Link href={"/day8/memos"} asChild>
+    <Link href={"/day8/weather"} asChild>
     <Button title='Go to weather app' />
     </Link>
     
