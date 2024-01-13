@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     container: {
         padding: 10,
         height: "100%",
-        aspectRatio: 9/16,
+        aspectRatio: 3/4,
         borderRadius: 10,
         alignItems: "center",
         justifyContent: "center",

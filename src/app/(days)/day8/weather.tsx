@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import * as Location from "expo-location";
 import ForecastItem from '@/components/day8/ForecastItem';
 import { Stack } from 'expo-router';
+import LottieView from "lottie-react-native";
 
 const BASE_URL = `https://api.openweathermap.org/data/2.5`;
 const OPEN_WEATHER_KEY = process.env.EXPO_PUBLIC_OPEN_WEATHER_KEY;
@@ -22,6 +23,14 @@ type MainWeather ={
 type Weather = {
   name: string;
   main: MainWeather;
+  weather: [
+    {
+      id: string;
+      main: string;
+      description: string;
+      icon: string;
+    }
+  ];
 };
 export type WeatherForecast = {
   main: MainWeather;
@@ -90,10 +99,12 @@ export default function WeatherScreen() {
       <View style={{...StyleSheet.absoluteFillObject, backgroundColor: "rgba(0,0,0,0.5)"}}/>
       <Stack.Screen options={{headerShown: false}}/>
     <View style={{alignItems: "center", justifyContent: "center", flex: 1}}>
+    <LottieView source={weather.weather[0].main === "Rain" ? require("@assets/lottie/rain.json") :require("@assets/lottie/sunny.json")} style={{width: 200, aspectRatio: 1}} loop autoPlay/>
       <Text style={styles.location}>{weather.name}</Text>
       <Text style={styles.temperature}>{Math.floor(weather.main.temp)}°</Text>
+      <Text style={styles.location}>{weather.weather[0].main}</Text>
       </View>
-      <FlatList showsHorizontalScrollIndicator={false} style={{flexGrow: 0, height: 200, marginBottom: 40}} contentContainerStyle={{gap: 10,paddingHorizontal: 10}} horizontal data={forecast} renderItem={({item}) => 
+      <FlatList showsHorizontalScrollIndicator={false} style={{flexGrow: 0, height: 150, marginBottom: 40}} contentContainerStyle={{gap: 10,paddingHorizontal: 10}} horizontal data={forecast} renderItem={({item}) => 
       <ForecastItem forecast={item} />
       }/>
     </ImageBackground>
